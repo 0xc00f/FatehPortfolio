@@ -291,21 +291,12 @@
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
   }
-  .about-placeholder{
+  .about-photo{
     width: 100%; height: 100%;
     border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    background: linear-gradient(155deg, rgba(157,78,221,0.22), rgba(0,240,255,0.12) 70%), #0B0B0D;
+    object-fit: cover;
+    object-position: 50% 22%;
     border: 1px solid rgba(255,255,255,0.06);
-  }
-  .about-placeholder span{
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-size: 3rem;
-    background: linear-gradient(100deg, var(--cyan), var(--purple));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
   .about-copy .section-tag{ text-align: left; margin-bottom: 12px; }
   .about-copy h2{
@@ -340,9 +331,8 @@
   .portfolio{ padding: 130px 0 120px; }
 
   .portfolio-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 26px;
+    columns: 4 340px;
+    column-gap: 26px;
   }
 
   .reel-card{
@@ -354,6 +344,11 @@
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s var(--ease);
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 26px;
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
   }
   .reel-card:hover{
     transform: translateY(-10px);
@@ -370,7 +365,15 @@
     background: #0B0B0D;
     border: 1px solid rgba(255,255,255,0.06);
   }
-  .reel-frame iframe,
+  .reel-frame.is-landscape{
+    aspect-ratio: 16 / 9;
+  }
+  .reel-frame iframe{
+    position: static;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
   .reel-frame video{
     width: 100%; height: 100%;
     border: 0;
@@ -566,14 +569,11 @@
   .site-footer .wrap{
     display:flex;
     align-items:center;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 16px;
   }
   .site-footer p{ font-size: 0.82rem; color: var(--text-dim); }
-  .socials{ display:flex; gap: 20px; }
-  .socials a{ font-size: 0.82rem; color: var(--text-mid); transition: color .25s; }
-  .socials a:hover{ color: var(--cyan); }
 
   /* ---------- Responsive ---------- */
   @media (max-width: 860px){
@@ -589,7 +589,8 @@
   }
 
   @media (max-width: 480px){
-    .portfolio-grid{ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+    .portfolio-grid{ columns: 2 250px; column-gap: 18px; }
+    .reel-card{ margin-bottom: 18px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -639,9 +640,7 @@
     <div class="wrap about-grid">
       <div class="about-media">
         <div class="about-frame">
-          <div class="about-placeholder">
-            <span>FT</span>
-          </div>
+          <img class="about-photo" src="https://i.ibb.co/j9jFNTjZ/image.png" alt="Fateh — Video Editor">
         </div>
       </div>
       <div class="about-copy">
@@ -668,92 +667,76 @@
       <div class="section-head">
         <div class="section-tag">Selected Work</div>
         <h2>Edits That Hold Attention</h2>
-        <p>A sample of vertical-first edits — drop your video link or iframe embed into each card below.</p>
+        <p>A sample of vertical-first edits, embedded directly from Drive.</p>
       </div>
 
       <div class="portfolio-grid">
 
         <!-- Card 1 -->
         <div class="reel-card">
-          <div class="reel-frame">
-            <!-- Replace this placeholder with: <iframe src="YOUR_EMBED_URL" allowfullscreen></iframe> -->
-            <div class="reel-placeholder">
-              <div class="play-ic"></div>
-              <small>Embed video here</small>
-            </div>
+          <div class="reel-frame" data-file-id="1R8RBWbC61aHSCo-IbZuFK7HMxtOapP8B">
+            <iframe src="https://drive.google.com/file/d/1R8RBWbC61aHSCo-IbZuFK7HMxtOapP8B/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
           </div>
           <div class="reel-meta">
             <div>
-              <h3>Dynamic Creator Edit</h3>
-              <p>Lifestyle · Hook + Pattern Interrupts</p>
+              <h3>Apple Style Showcase</h3>
+              <p>A custom promotional video asset designed to establish a strong digital presence with custom visual effects.</p>
             </div>
-            <span class="reel-tag">Reel</span>
+            <span class="reel-tag">Promo</span>
           </div>
         </div>
 
         <!-- Card 2 -->
         <div class="reel-card">
-          <div class="reel-frame">
-            <div class="reel-placeholder">
-              <div class="play-ic"></div>
-              <small>Embed video here</small>
-            </div>
+          <div class="reel-frame" data-file-id="15jWLVyEYX-fLGjTQjZ0LQtTBH5BGMLao">
+            <iframe src="https://drive.google.com/file/d/15jWLVyEYX-fLGjTQjZ0LQtTBH5BGMLao/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
           </div>
           <div class="reel-meta">
             <div>
-              <h3>Podcast Clip Cutdown</h3>
-              <p>Talking Head · Animated Captions</p>
+              <h3>Fast-Paced Promotional Trailer</h3>
+              <p>A dynamic video project focusing on engaging visual storytelling, with Motion Graphics elevating the final product for a polished look.</p>
             </div>
-            <span class="reel-tag">Shorts</span>
+            <span class="reel-tag">Trailer</span>
           </div>
         </div>
 
         <!-- Card 3 -->
         <div class="reel-card">
-          <div class="reel-frame">
-            <div class="reel-placeholder">
-              <div class="play-ic"></div>
-              <small>Embed video here</small>
-            </div>
+          <div class="reel-frame is-landscape" data-file-id="10gNrEzudv8KRkmCwwK9pNF9cVfZmf9kd">
+            <iframe src="https://drive.google.com/file/d/10gNrEzudv8KRkmCwwK9pNF9cVfZmf9kd/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
           </div>
           <div class="reel-meta">
             <div>
-              <h3>Brand Product Reveal</h3>
-              <p>E-commerce · Fast-Cut Montage</p>
+              <h3>Kinetic Typography &amp; Stylized Character Edit</h3>
+              <p>A dynamic visual edit relying on advanced compositing and smooth transitions, syncing layered VFX and kinetic text for a vibrant, engaging aesthetic.</p>
             </div>
-            <span class="reel-tag">TikTok</span>
+            <span class="reel-tag">Motion</span>
           </div>
         </div>
 
         <!-- Card 4 -->
         <div class="reel-card">
-          <div class="reel-frame">
-            <div class="reel-placeholder">
-              <div class="play-ic"></div>
-              <small>Embed video here</small>
-            </div>
+          <div class="reel-frame is-landscape" data-file-id="1kxg4pH171qCE5gr26_c00KnSby8cVvVs">
+            <iframe src="https://drive.google.com/file/d/1kxg4pH171qCE5gr26_c00KnSby8cVvVs/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
           </div>
           <div class="reel-meta">
             <div>
-              <h3>Story-Driven Vlog Edit</h3>
-              <p>Narrative · Sound Design Focus</p>
+              <h3>Digital Ustad Academy — Educator Course Hook</h3>
+              <p>Introductory video for a high-revenue online teaching course, integrating high-quality motion graphics in After Effects to maintain strong viewer retention.</p>
             </div>
-            <span class="reel-tag">Reel</span>
+            <span class="reel-tag">Course</span>
           </div>
         </div>
 
         <!-- Card 5 -->
         <div class="reel-card">
-          <div class="reel-frame">
-            <div class="reel-placeholder">
-              <div class="play-ic"></div>
-              <small>Embed video here</small>
-            </div>
+          <div class="reel-frame is-landscape" data-file-id="1jaLxGbFD9EOY3yW0KaPKYttne3y7VaX6">
+            <iframe src="https://drive.google.com/file/d/1jaLxGbFD9EOY3yW0KaPKYttne3y7VaX6/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
           </div>
           <div class="reel-meta">
             <div>
-              <h3>UGC-Style Ad Cut</h3>
-              <p>Performance · Hook Testing Variant A</p>
+              <h3>Digital Track Ministry — Motion Graphics Advertisement</h3>
+              <p>A high-impact promotional ad featuring premium motion graphics and fluid visual transitions, built to capture attention from the first frame to the CTA.</p>
             </div>
             <span class="reel-tag">Ad</span>
           </div>
@@ -761,18 +744,43 @@
 
         <!-- Card 6 -->
         <div class="reel-card">
-          <div class="reel-frame">
-            <div class="reel-placeholder">
-              <div class="play-ic"></div>
-              <small>Embed video here</small>
-            </div>
+          <div class="reel-frame" data-file-id="1jeeGjSuaelpnny76A4dRdxVOUAXp6BZE">
+            <iframe src="https://drive.google.com/file/d/1jeeGjSuaelpnny76A4dRdxVOUAXp6BZE/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
           </div>
           <div class="reel-meta">
             <div>
-              <h3>Comedy Skit Edit</h3>
-              <p>Entertainment · Timing + SFX</p>
+              <h3>AmirDev Service Showcase</h3>
+              <p>A visually engaging commercial ad built around high-conversion marketing, with clean After Effects motion graphics guiding attention to the CTA.</p>
             </div>
-            <span class="reel-tag">Shorts</span>
+            <span class="reel-tag">Commercial</span>
+          </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div class="reel-card">
+          <div class="reel-frame" data-file-id="164SlBe_2cmMeQxKhOoMMyb3qjuTSLOXa">
+            <iframe src="https://drive.google.com/file/d/164SlBe_2cmMeQxKhOoMMyb3qjuTSLOXa/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="reel-meta">
+            <div>
+              <h3>Motion Graphics &amp; Animation Sequence</h3>
+              <p>A dynamic composition showcasing smooth keyframing, custom visual assets, and precise timing for an engaging, professional final cut.</p>
+            </div>
+            <span class="reel-tag">Motion</span>
+          </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div class="reel-card">
+          <div class="reel-frame" data-file-id="1N1GTremjkg_60kb2Ne-C721gyCQi1k7s">
+            <iframe src="https://drive.google.com/file/d/1N1GTremjkg_60kb2Ne-C721gyCQi1k7s/preview" allow="autoplay" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="reel-meta">
+            <div>
+              <h3>Dynamic Content Creation &amp; Editing</h3>
+              <p>A highly engaging video for a digital trading platform, combining sharp editing, layered audio, and smooth visual effects for strong viewer retention.</p>
+            </div>
+            <span class="reel-tag">Trading</span>
           </div>
         </div>
 
@@ -816,19 +824,13 @@
     <h2>Let's turn your footage into <span class="grad">watch time</span>.</h2>
     <p>Send over your raw footage or a project brief — I'll reply within 24 hours with a plan, timeline, and quote.</p>
     <div class="contact-row">
-      <a href="mailto:fateh@example.com" class="btn-glow">Email Me →</a>
-      <a href="https://instagram.com/" class="btn-ghost">DM on Instagram</a>
+      <a href="mailto:fatehmoudawork@gmail.com" class="btn-glow">Email Me →</a>
     </div>
   </section>
 
   <footer class="site-footer">
     <div class="wrap">
       <p>© 2026 Fateh — Video Editor. Reliable communication, on-time delivery, every project.</p>
-      <div class="socials">
-        <a href="#">Instagram</a>
-        <a href="#">TikTok</a>
-        <a href="#">YouTube</a>
-      </div>
     </div>
   </footer>
 
