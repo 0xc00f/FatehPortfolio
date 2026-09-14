@@ -559,7 +559,60 @@
     justify-content: center;
     gap: 18px;
     flex-wrap: wrap;
-    margin-bottom: 90px;
+    margin-bottom: 28px;
+  }
+
+  .email-pill{
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 auto 90px;
+    padding: 10px 10px 10px 22px;
+    border-radius: 999px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    width: fit-content;
+  }
+  .email-pill span#emailText{
+    font-size: 0.92rem;
+    color: var(--text-hi);
+    font-family: var(--font-body);
+    letter-spacing: 0.01em;
+  }
+  .copy-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-family: var(--font-body);
+    color: var(--bg);
+    background: linear-gradient(100deg, var(--cyan), var(--purple));
+    border: none;
+    cursor: pointer;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .copy-btn:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 0 16px rgba(0,240,255,0.35);
+  }
+  .copy-btn:active{ transform: translateY(0); }
+  .copy-btn svg{ flex-shrink: 0; }
+
+  @media (max-width: 480px){
+    .email-pill{
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+      padding: 18px;
+      gap: 12px;
+      border-radius: 18px;
+    }
+    .copy-btn{ justify-content: center; }
   }
 
   footer.site-footer{
@@ -640,7 +693,7 @@
     <div class="wrap about-grid">
       <div class="about-media">
         <div class="about-frame">
-          <img class="about-photo" src="https://i.ibb.co/j9jFNTjZ/image.png" alt="Fateh — Video Editor">
+          <img class="about-photo" src="https://i.ibb.co/HLs5HcD4/Screenshot-2026-09-14-172100.png" alt="Fateh — Video Editor">
         </div>
       </div>
       <div class="about-copy">
@@ -826,7 +879,54 @@
     <div class="contact-row">
       <a href="mailto:fatehmoudawork@gmail.com" class="btn-glow">Email Me →</a>
     </div>
+
+    <div class="email-pill">
+      <span id="emailText">fatehmoudawork@gmail.com</span>
+      <button type="button" class="copy-btn" onclick="copyEmail()" aria-label="Copy email address">
+        <svg id="copyIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span id="copyLabel">Copy</span>
+      </button>
+    </div>
   </section>
+
+  <script>
+    function copyEmail(){
+      var email = document.getElementById('emailText').textContent;
+      var label = document.getElementById('copyLabel');
+      var icon = document.getElementById('copyIcon');
+      var reset = function(){
+        label.textContent = 'Copy';
+        icon.innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>';
+      };
+      var showCopied = function(){
+        label.textContent = 'Copied!';
+        icon.innerHTML = '<polyline points="20 6 9 17 4 12"></polyline>';
+        setTimeout(reset, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(email).then(showCopied).catch(function(){
+          var ta = document.createElement('textarea');
+          ta.value = email;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showCopied();
+        });
+      } else {
+        var ta = document.createElement('textarea');
+        ta.value = email;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showCopied();
+      }
+    }
+  </script>
 
   <footer class="site-footer">
     <div class="wrap">
